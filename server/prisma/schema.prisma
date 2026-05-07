@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  username     String     @unique
+  passwordHash String
+  steamId      String?
+  createdAt    DateTime   @default(now())
+  loadouts     Loadout[]
+  matches      Match[]
+}
+
+model Loadout {
+  id        String   @id @default(cuid())
+  name      String
+  side      String   // "T" | "CT"
+  primary   String   // напр. "AK-47", "M4A4"
+  secondary String   // напр. "Desert Eagle"
+  knife     String?
+  notes     String?
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+
+  @@index([userId])
+}
+
+model Match {
+  id        String   @id @default(cuid())
+  map       String   // "de_dust2", "de_mirage", ...
+  result    String   // "win" | "loss" | "draw"
+  score     String   // "16:13"
+  kills     Int      @default(0)
+  deaths    Int      @default(0)
+  assists   Int      @default(0)
+  playedAt  DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+
+  @@index([userId, playedAt])
+}

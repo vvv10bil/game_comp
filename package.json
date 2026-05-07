@@ -1,0 +1,18 @@
+{
+  "name": "cs2-companion",
+  "private": true,
+  "version": "0.1.0",
+  "description": "CS2 companion web app — React + Node.js + Prisma",
+  "workspaces": ["client", "server"],
+  "scripts": {
+    "dev": "concurrently -n server,client -c blue,magenta \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:server": "npm --workspace server run dev",
+    "dev:client": "npm --workspace client run dev",
+    "build": "npm --workspace client run build",
+    "db:init": "npm --workspace server run db:init",
+    "db:studio": "npm --workspace server run db:studio"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

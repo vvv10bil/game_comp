@@ -1,0 +1,19 @@
+{
+  "name": "CS2 Companion",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "forwardPorts": [3000, 5173],
+  "portsAttributes": {
+    "3000": { "label": "API (Express)", "onAutoForward": "silent" },
+    "5173": { "label": "Web (Vite)", "onAutoForward": "openBrowser" }
+  },
+  "postCreateCommand": "npm install && cp -n server/.env.example server/.env && npm run db:init",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "Prisma.prisma"
+      ]
+    }
+  }
+}
