@@ -1,6 +1,7 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../context/AuthContext.jsx";
+import { Crosshair } from "./Crosshair.jsx";
 
 export function Navbar() {
   const { user, logout } = useAuth();
@@ -14,6 +15,7 @@ export function Navbar() {
   return (
     <header className="navbar">
       <Link to="/" className="brand">
+        <Crosshair size={22} color="#f5a623" />
         CS2<span>Companion</span>
       </Link>
       {user && (

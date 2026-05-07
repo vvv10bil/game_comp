@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 
 import { api } from "../api/client.js";
+import { MapThumb } from "../components/MapThumb.jsx";
 
 const EMPTY = { map: "de_dust2", result: "win", score: "16:13", kills: 0, deaths: 0, assists: 0 };
+
+const MAPS = ["de_dust2", "de_mirage", "de_inferno", "de_nuke", "de_overpass", "de_ancient", "de_anubis", "de_vertigo"];
 
 export function Matches() {
   const [items, setItems] = useState([]);
@@ -44,14 +47,7 @@ export function Matches() {
           <label>
             Мапа
             <select name="map" value={form.map} onChange={onChange}>
-              <option>de_dust2</option>
-              <option>de_mirage</option>
-              <option>de_inferno</option>
-              <option>de_nuke</option>
-              <option>de_overpass</option>
-              <option>de_ancient</option>
-              <option>de_anubis</option>
-              <option>de_vertigo</option>
+              {MAPS.map((m) => <option key={m}>{m}</option>)}
             </select>
           </label>
           <label>
@@ -76,33 +72,29 @@ export function Matches() {
         <button className="btn primary">Додати</button>
       </form>
 
-      <table className="matches">
-        <thead>
-          <tr>
-            <th>Дата</th>
-            <th>Мапа</th>
-            <th>Результат</th>
-            <th>Рахунок</th>
-            <th>K/D/A</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((m) => (
-            <tr key={m.id}>
-              <td>{new Date(m.playedAt).toLocaleDateString()}</td>
-              <td>{m.map}</td>
-              <td className={`result-${m.result}`}>{m.result}</td>
-              <td>{m.score}</td>
-              <td>{m.kills}/{m.deaths}/{m.assists}</td>
-              <td><button className="btn ghost" onClick={() => onDelete(m.id)}>×</button></td>
-            </tr>
-          ))}
-          {items.length === 0 && (
-            <tr><td colSpan={6} className="muted">Поки що немає матчів.</td></tr>
-          )}
-        </tbody>
-      </table>
+      <div className="grid matches-grid">
+        {items.length === 0 && <p className="muted">Поки що немає матчів.</p>}
+        {items.map((m) => (
+          <article key={m.id} className={`card match-card result-bg-${m.result}`}>
+            <MapThumb map={m.map} size="md" />
+            <div className="match-body">
+              <header className="match-header">
+                <span className={`badge result-${m.result}`}>
+                  {m.result === "win" ? "Перемога" : m.result === "loss" ? "Поразка" : "Нічия"}
+                </span>
+                <span className="muted">{new Date(m.playedAt).toLocaleDateString()}</span>
+              </header>
+              <div className="match-score">{m.score}</div>
+              <div className="match-kda">
+                <span><b>{m.kills}</b><small>K</small></span>
+                <span><b>{m.deaths}</b><small>D</small></span>
+                <span><b>{m.assists}</b><small>A</small></span>
+              </div>
+              <button className="btn ghost match-delete" onClick={() => onDelete(m.id)}>Видалити</button>
+            </div>
+          </article>
+        ))}
+      </div>
     </section>
   );
 }

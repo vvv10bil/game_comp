@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 
 import { api } from "../api/client.js";
+import { WeaponImage } from "../components/WeaponImage.jsx";
 
 const EMPTY = { name: "", side: "T", primary: "AK-47", secondary: "Desert Eagle", knife: "", notes: "" };
+
+const PRIMARY_OPTIONS = ["AK-47", "M4A4", "M4A1-S", "AWP", "FAMAS", "Galil AR"];
+const SECONDARY_OPTIONS = ["Desert Eagle", "USP-S", "Glock-18", "P250"];
 
 export function Loadouts() {
   const [items, setItems] = useState([]);
@@ -56,15 +60,19 @@ export function Loadouts() {
         <div className="row">
           <label>
             Primary
-            <input name="primary" value={form.primary} onChange={onChange} required />
+            <select name="primary" value={form.primary} onChange={onChange}>
+              {PRIMARY_OPTIONS.map((w) => <option key={w}>{w}</option>)}
+            </select>
           </label>
           <label>
             Secondary
-            <input name="secondary" value={form.secondary} onChange={onChange} required />
+            <select name="secondary" value={form.secondary} onChange={onChange}>
+              {SECONDARY_OPTIONS.map((w) => <option key={w}>{w}</option>)}
+            </select>
           </label>
           <label>
             Ніж
-            <input name="knife" value={form.knife} onChange={onChange} />
+            <input name="knife" value={form.knife} onChange={onChange} placeholder="Karambit, Butterfly…" />
           </label>
         </div>
         <label>
@@ -78,17 +86,26 @@ export function Loadouts() {
       <div className="grid loadouts">
         {items.length === 0 && <p className="muted">Поки що немає лоудаутів.</p>}
         {items.map((l) => (
-          <article key={l.id} className="card loadout-card">
+          <article key={l.id} className={`card loadout-card side-bg-${l.side}`}>
             <header>
               <h3>{l.name}</h3>
               <span className={`badge side-${l.side}`}>{l.side}</span>
             </header>
-            <ul className="loadout-list">
-              <li><b>Primary:</b> {l.primary}</li>
-              <li><b>Secondary:</b> {l.secondary}</li>
-              {l.knife && <li><b>Ніж:</b> {l.knife}</li>}
-            </ul>
+
+            <div className="loadout-weapons">
+              <div className="loadout-weapon">
+                <WeaponImage name={l.primary} />
+                <span>{l.primary}</span>
+              </div>
+              <div className="loadout-weapon">
+                <WeaponImage name={l.secondary} />
+                <span>{l.secondary}</span>
+              </div>
+            </div>
+
+            {l.knife && <p className="muted"><b>Ніж:</b> {l.knife}</p>}
             {l.notes && <p className="muted">{l.notes}</p>}
+
             <button className="btn danger" onClick={() => onDelete(l.id)}>Видалити</button>
           </article>
         ))}
