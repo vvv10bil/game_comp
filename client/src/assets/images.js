@@ -2,54 +2,68 @@
 //   1. Local file from client/public/media/   (highest priority)
 //   2. ByMykel/CSGO-API GitHub CDN
 //   3. CSS-only fallback card
-//
-// Drop your CS2 game assets into:
-//   client/public/media/intro.webm
-//   client/public/media/weapons/<slug>.png      (e.g. ak-47.png, m4a4.png)
-//   client/public/media/maps/<map>.png          (e.g. de_dust2.png)
 
-export function weaponLocalPath(name) {
-  if (!name) return null;
-  const slug = name.toLowerCase().replace(/\s+/g, "-");
-  return `/media/weapons/${slug}.png`;
+const CDN = "https://raw.githubusercontent.com/ByMykel/CSGO-API/main/public/images";
+
+// Maps weapon display name (as returned by /api/weapons) to a local file
+// in client/public/media/. If a weapon isn't here, the CDN URL below is used.
+const WEAPON_LOCAL = {
+  "AK-47":         "/media/ak47.png",
+  "M4A1-S":        "/media/m4a1_c.png",
+  "AWP":           "/media/awp.png",
+  "FAMAS":         "/media/famas.png",
+  "Galil AR":      "/media/galil.png",
+  "AUG":           "/media/aug.png",
+  "SSG 08":        "/media/ssg08.png",
+  "Desert Eagle":  "/media/deagle.png",
+  "USP-S":         "/media/usp.png",
+  "P250":          "/media/p250.png",
+  "Tec-9":         "/media/tec9.png",
+  "Five-SeveN":    "/media/fiveseven.png",
+  "Dual Berettas": "/media/dual_beretas.png",
+  "MP9":           "/media/mp9.png",
+  "MP5-SD":        "/media/mp5.png",
+  "MAC-10":        "/media/mac10.png",
+  "P90":           "/media/p90.png",
+  "Nova":          "/media/nova.png",
+  "XM1014":        "/media/m1014.png",
+};
+
+const WEAPON_CDN = {
+  "AK-47":         `${CDN}/econ/weapons/base_weapons/weapon_ak47.png`,
+  "M4A4":          `${CDN}/econ/weapons/base_weapons/weapon_m4a1.png`,
+  "M4A1-S":        `${CDN}/econ/weapons/base_weapons/weapon_m4a1_silencer.png`,
+  "AWP":           `${CDN}/econ/weapons/base_weapons/weapon_awp.png`,
+  "FAMAS":         `${CDN}/econ/weapons/base_weapons/weapon_famas.png`,
+  "Galil AR":      `${CDN}/econ/weapons/base_weapons/weapon_galilar.png`,
+  "AUG":           `${CDN}/econ/weapons/base_weapons/weapon_aug.png`,
+  "SSG 08":        `${CDN}/econ/weapons/base_weapons/weapon_ssg08.png`,
+  "Desert Eagle":  `${CDN}/econ/weapons/base_weapons/weapon_deagle.png`,
+  "USP-S":         `${CDN}/econ/weapons/base_weapons/weapon_usp_silencer.png`,
+  "Glock-18":      `${CDN}/econ/weapons/base_weapons/weapon_glock.png`,
+  "P250":          `${CDN}/econ/weapons/base_weapons/weapon_p250.png`,
+  "Tec-9":         `${CDN}/econ/weapons/base_weapons/weapon_tec9.png`,
+  "Five-SeveN":    `${CDN}/econ/weapons/base_weapons/weapon_fiveseven.png`,
+  "Dual Berettas": `${CDN}/econ/weapons/base_weapons/weapon_elite.png`,
+  "MP9":           `${CDN}/econ/weapons/base_weapons/weapon_mp9.png`,
+  "MP5-SD":        `${CDN}/econ/weapons/base_weapons/weapon_mp5sd.png`,
+  "MAC-10":        `${CDN}/econ/weapons/base_weapons/weapon_mac10.png`,
+  "P90":           `${CDN}/econ/weapons/base_weapons/weapon_p90.png`,
+  "Nova":          `${CDN}/econ/weapons/base_weapons/weapon_nova.png`,
+  "XM1014":        `${CDN}/econ/weapons/base_weapons/weapon_xm1014.png`,
+};
+
+export function weaponSources(name) {
+  return [WEAPON_LOCAL[name], WEAPON_CDN[name]].filter(Boolean);
 }
 
-export function mapLocalPath(map) {
-  if (!map) return null;
-  return `/media/maps/${map}.png`;
+export function mapSources(map) {
+  if (!map) return [];
+  return [`/media/${map}.png`, `${CDN}/maps/screenshots/${map}.png`];
 }
 
 export const HERO_VIDEO = "/media/intro.webm";
 
-const CDN = "https://raw.githubusercontent.com/ByMykel/CSGO-API/main/public/images";
-
-export const WEAPON_IMAGE = {
-  "AK-47": `${CDN}/econ/weapons/base_weapons/weapon_ak47.png`,
-  "M4A4": `${CDN}/econ/weapons/base_weapons/weapon_m4a1.png`,
-  "M4A1-S": `${CDN}/econ/weapons/base_weapons/weapon_m4a1_silencer.png`,
-  "AWP": `${CDN}/econ/weapons/base_weapons/weapon_awp.png`,
-  "FAMAS": `${CDN}/econ/weapons/base_weapons/weapon_famas.png`,
-  "Galil AR": `${CDN}/econ/weapons/base_weapons/weapon_galilar.png`,
-  "Desert Eagle": `${CDN}/econ/weapons/base_weapons/weapon_deagle.png`,
-  "USP-S": `${CDN}/econ/weapons/base_weapons/weapon_usp_silencer.png`,
-  "Glock-18": `${CDN}/econ/weapons/base_weapons/weapon_glock.png`,
-  "P250": `${CDN}/econ/weapons/base_weapons/weapon_p250.png`,
-  "MP9": `${CDN}/econ/weapons/base_weapons/weapon_mp9.png`,
-  "MAC-10": `${CDN}/econ/weapons/base_weapons/weapon_mac10.png`,
-};
-
-export const MAP_IMAGE = {
-  de_dust2: `${CDN}/maps/screenshots/de_dust2.png`,
-  de_mirage: `${CDN}/maps/screenshots/de_mirage.png`,
-  de_inferno: `${CDN}/maps/screenshots/de_inferno.png`,
-  de_nuke: `${CDN}/maps/screenshots/de_nuke.png`,
-  de_overpass: `${CDN}/maps/screenshots/de_overpass.png`,
-  de_ancient: `${CDN}/maps/screenshots/de_ancient.png`,
-  de_anubis: `${CDN}/maps/screenshots/de_anubis.png`,
-  de_vertigo: `${CDN}/maps/screenshots/de_vertigo.png`,
-};
-
-// Fallback gradient used when remote image is unavailable.
 export const MAP_THEME = {
   de_dust2:    "linear-gradient(135deg, #c9a16b 0%, #6b4f2a 100%)",
   de_mirage:   "linear-gradient(135deg, #e0b07c 0%, #8a4a2a 100%)",

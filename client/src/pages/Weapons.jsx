@@ -31,6 +31,7 @@ export function Weapons() {
           <option value="rifle">Гвинтівки</option>
           <option value="sniper">Снайперські</option>
           <option value="smg">SMG</option>
+          <option value="heavy">Важка зброя</option>
           <option value="pistol">Пістолети</option>
         </select>
       </div>

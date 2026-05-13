@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-import { WEAPON_IMAGE, weaponLocalPath } from "../assets/images.js";
+import { weaponSources } from "../assets/images.js";
 
 export function WeaponImage({ name, className = "weapon-img", alt }) {
-  const sources = [weaponLocalPath(name), WEAPON_IMAGE[name]].filter(Boolean);
+  const sources = weaponSources(name);
   const [idx, setIdx] = useState(0);
 
-  if (idx >= sources.length) {
+  if (sources.length === 0 || idx >= sources.length) {
     return (
       <div className={`${className} weapon-img-fallback`}>
         <span>{name}</span>

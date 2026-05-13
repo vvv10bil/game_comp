@@ -267,6 +267,7 @@ h3 { margin: 0 0 12px; }
 .badge.cat-rifle { background: rgba(245,166,35,0.15); color: var(--accent); }
 .badge.cat-sniper { background: rgba(167,139,250,0.15); color: #a78bfa; }
 .badge.cat-smg { background: rgba(6,182,212,0.15); color: #06b6d4; }
+.badge.cat-heavy { background: rgba(248,81,73,0.15); color: var(--danger); }
 .badge.cat-pistol { background: rgba(139,148,158,0.15); color: var(--muted); }
 .badge.result-win { background: rgba(63,185,80,0.15); color: var(--success); }
 .badge.result-loss { background: rgba(248,81,73,0.15); color: var(--danger); }

@@ -36,7 +36,3 @@ server/prisma/migrations/dev/
 # Misc
 coverage/
 .cache/
-
-# Local CS2 media assets (Valve IP, keep out of repo)
-client/public/media/*
-!client/public/media/README.md

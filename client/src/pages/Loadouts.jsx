@@ -5,8 +5,13 @@ import { WeaponImage } from "../components/WeaponImage.jsx";
 
 const EMPTY = { name: "", side: "T", primary: "AK-47", secondary: "Desert Eagle", knife: "", notes: "" };
 
-const PRIMARY_OPTIONS = ["AK-47", "M4A4", "M4A1-S", "AWP", "FAMAS", "Galil AR"];
-const SECONDARY_OPTIONS = ["Desert Eagle", "USP-S", "Glock-18", "P250"];
+const PRIMARY_OPTIONS = [
+  "AK-47", "M4A4", "M4A1-S", "AWP", "SSG 08", "FAMAS", "Galil AR", "AUG",
+  "MP9", "MP5-SD", "MAC-10", "P90", "Nova", "XM1014",
+];
+const SECONDARY_OPTIONS = [
+  "Desert Eagle", "USP-S", "Glock-18", "P250", "Tec-9", "Five-SeveN", "Dual Berettas",
+];
 
 export function Loadouts() {
   const [items, setItems] = useState([]);
