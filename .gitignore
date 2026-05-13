@@ -36,3 +36,7 @@ server/prisma/migrations/dev/
 # Misc
 coverage/
 .cache/
+
+# Large media files (e.g. CS2 intro video) - keep local only
+client/public/*.webm
+client/public/*.mp4

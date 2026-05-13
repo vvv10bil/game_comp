@@ -29,6 +29,16 @@ export function Dashboard() {
   return (
     <section>
       <div className="hero">
+        <video
+          className="hero-video"
+          src="/intro720p.webm"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          onError={(e) => e.currentTarget.remove()}
+        />
         <div className="hero-bg" aria-hidden="true" />
         <div className="hero-content">
           <div className="hero-eyebrow">

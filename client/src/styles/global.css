@@ -162,12 +162,19 @@ h3 { margin: 0 0 12px; }
   border: 1px solid var(--border);
   isolation: isolate;
 }
+.hero-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: -2;
+  filter: brightness(0.6) saturate(1.1);
+}
 .hero-bg {
   position: absolute; inset: 0;
   background:
     radial-gradient(ellipse at 80% 20%, rgba(245,166,35,0.25), transparent 60%),
     radial-gradient(ellipse at 10% 80%, rgba(37,99,235,0.18), transparent 55%),
-    linear-gradient(135deg, #0e1116 0%, #1a2230 100%);
+    linear-gradient(135deg, rgba(14,17,22,0.85) 0%, rgba(26,34,48,0.75) 100%);
   z-index: -1;
 }
 .hero-bg::after {
