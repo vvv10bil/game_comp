@@ -1,6 +1,25 @@
-// Public CS2 image assets via the open-source CSGO-API mirror on GitHub.
-// All URLs serve directly from raw.githubusercontent.com (no API key needed).
-// If an image fails to load, components fall back to a CSS-only stylized card.
+// Image resolution order used by <WeaponImage> and <MapThumb>:
+//   1. Local file from client/public/media/   (highest priority)
+//   2. ByMykel/CSGO-API GitHub CDN
+//   3. CSS-only fallback card
+//
+// Drop your CS2 game assets into:
+//   client/public/media/intro.webm
+//   client/public/media/weapons/<slug>.png      (e.g. ak-47.png, m4a4.png)
+//   client/public/media/maps/<map>.png          (e.g. de_dust2.png)
+
+export function weaponLocalPath(name) {
+  if (!name) return null;
+  const slug = name.toLowerCase().replace(/\s+/g, "-");
+  return `/media/weapons/${slug}.png`;
+}
+
+export function mapLocalPath(map) {
+  if (!map) return null;
+  return `/media/maps/${map}.png`;
+}
+
+export const HERO_VIDEO = "/media/intro.webm";
 
 const CDN = "https://raw.githubusercontent.com/ByMykel/CSGO-API/main/public/images";
 

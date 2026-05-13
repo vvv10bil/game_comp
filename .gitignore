@@ -37,6 +37,6 @@ server/prisma/migrations/dev/
 coverage/
 .cache/
 
-# Large media files (e.g. CS2 intro video) - keep local only
-client/public/*.webm
-client/public/*.mp4
+# Local CS2 media assets (Valve IP, keep out of repo)
+client/public/media/*
+!client/public/media/README.md

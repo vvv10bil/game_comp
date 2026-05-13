@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { api } from "../api/client.js";
+import { HERO_VIDEO } from "../assets/images.js";
 import { KdaBar } from "../components/charts/KdaBar.jsx";
 import { KdTrend } from "../components/charts/KdTrend.jsx";
 import { MapBar } from "../components/charts/MapBar.jsx";
@@ -31,7 +32,7 @@ export function Dashboard() {
       <div className="hero">
         <video
           className="hero-video"
-          src="/intro720p.webm"
+          src={HERO_VIDEO}
           autoPlay
           muted
           loop

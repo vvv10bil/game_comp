@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-import { WEAPON_IMAGE } from "../assets/images.js";
+import { WEAPON_IMAGE, weaponLocalPath } from "../assets/images.js";
 
 export function WeaponImage({ name, className = "weapon-img", alt }) {
-  const [broken, setBroken] = useState(false);
-  const src = WEAPON_IMAGE[name];
+  const sources = [weaponLocalPath(name), WEAPON_IMAGE[name]].filter(Boolean);
+  const [idx, setIdx] = useState(0);
 
-  if (!src || broken) {
+  if (idx >= sources.length) {
     return (
       <div className={`${className} weapon-img-fallback`}>
         <span>{name}</span>
@@ -16,11 +16,12 @@ export function WeaponImage({ name, className = "weapon-img", alt }) {
 
   return (
     <img
+      key={idx}
       className={className}
-      src={src}
+      src={sources[idx]}
       alt={alt ?? name}
       loading="lazy"
-      onError={() => setBroken(true)}
+      onError={() => setIdx((i) => i + 1)}
     />
   );
 }
