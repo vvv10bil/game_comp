@@ -12,9 +12,14 @@
 .
 ├── .devcontainer/           # Конфігурація GitHub Codespaces
 ├── client/                  # React-фронтенд (Vite)
+│   ├── public/
+│   │   ├── favicon.svg      # SVG-приціл для вкладки браузера
+│   │   └── media/           # CS2-асети: intro.webm, іконки зброї, мапи
 │   ├── src/
 │   │   ├── api/             # axios-клієнт до бекенду
+│   │   ├── assets/          # мапінг імен зброї/мап → шляхи до файлів
 │   │   ├── components/      # перевикористовувані компоненти UI
+│   │   │   └── charts/      # компоненти графіків на Recharts
 │   │   ├── context/         # React-контексти (AuthContext)
 │   │   ├── pages/           # сторінки маршрутів
 │   │   └── styles/          # CSS

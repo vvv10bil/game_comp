@@ -187,9 +187,22 @@ User ──┬─< Loadout
 game_comp/
 ├── .devcontainer/devcontainer.json    # GitHub Codespaces
 ├── client/
+│   ├── public/
+│   │   ├── favicon.svg                # SVG-приціл для вкладки браузера
+│   │   └── media/                     # CS2-медіа (Valve assets)
+│   │       ├── intro.webm             # hero-відео на дашборді
+│   │       ├── game-icon.bmp          # логотип у навбарі
+│   │       ├── ak47.png, awp.png …    # PNG-іконки зброї
+│   │       └── de_dust2.png, …        # PNG-зображення мап
 │   ├── src/
 │   │   ├── api/client.js              # axios instance
-│   │   ├── components/Navbar.jsx
+│   │   ├── assets/images.js           # name → file mapping (weapons/maps)
+│   │   ├── components/
+│   │   │   ├── Crosshair.jsx          # SVG-приціл
+│   │   │   ├── MapThumb.jsx           # картка з зображенням мапи
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── WeaponImage.jsx        # картинка зброї з fallback
+│   │   │   └── charts/                # WinLossPie, KdaBar, KdTrend, MapBar
 │   │   ├── context/AuthContext.jsx
 │   │   ├── pages/                     # Login, Register, Dashboard,
 │   │   │                              # Loadouts, Matches, Weapons
