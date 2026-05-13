@@ -8,6 +8,8 @@ import { KdTrend } from "../components/charts/KdTrend.jsx";
 import { MapBar } from "../components/charts/MapBar.jsx";
 import { WinLossPie } from "../components/charts/WinLossPie.jsx";
 import { Crosshair } from "../components/Crosshair.jsx";
+import { MapThumb } from "../components/MapThumb.jsx";
+import { WeaponImage } from "../components/WeaponImage.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
 
 export function Dashboard() {
@@ -64,14 +66,14 @@ export function Dashboard() {
         <ChartCard title="Перемоги vs Поразки">
           <WinLossPie wins={stats?.wins ?? 0} losses={stats?.losses ?? 0} draws={draws} />
         </ChartCard>
-        <ChartCard title="K/D-тренд (останні матчі)">
-          <KdTrend matches={matches} />
+        <ChartCard title="Розподіл по мапах">
+          <MapBar matches={matches} />
         </ChartCard>
         <ChartCard title="K/D/A в останніх 10 матчах">
           <KdaBar matches={matches} />
         </ChartCard>
-        <ChartCard title="Розподіл по мапах">
-          <MapBar matches={matches} />
+        <ChartCard title="K/D-тренд (останні матчі)" full>
+          <KdTrend matches={matches} />
         </ChartCard>
       </div>
 
@@ -80,16 +82,22 @@ export function Dashboard() {
           to="/loadouts"
           title="Лоудаути"
           desc="Зберігай улюблені комплекти зброї та скінів."
+          accent="t"
+          art={<WeaponImage name="AK-47" className="quick-art-img" />}
         />
         <QuickCard
           to="/matches"
           title="Журнал матчів"
           desc="Логуй гру: K/D, мапа, рахунок, результат."
+          accent="map"
+          art={<MapThumb map="de_dust2" size="md" />}
         />
         <QuickCard
           to="/weapons"
           title="Каталог зброї"
           desc="Переглядай зброю CS2 з фільтрами по сторонах і категоріях."
+          accent="ct"
+          art={<WeaponImage name="AWP" className="quick-art-img" />}
         />
       </div>
     </section>
@@ -105,20 +113,24 @@ function StatCard({ label, value, accent }) {
   );
 }
 
-function ChartCard({ title, children }) {
+function ChartCard({ title, children, full }) {
   return (
-    <div className="card chart-card">
+    <div className={`card chart-card ${full ? "chart-full" : ""}`}>
       <h3>{title}</h3>
       <div className="chart-body">{children}</div>
     </div>
   );
 }
 
-function QuickCard({ to, title, desc }) {
+function QuickCard({ to, title, desc, art, accent }) {
   return (
-    <Link to={to} className="card quick-card">
-      <h3>{title}</h3>
-      <p>{desc}</p>
+    <Link to={to} className={`card quick-card quick-${accent ?? "default"}`}>
+      <div className="quick-art">{art}</div>
+      <div className="quick-body">
+        <h3>{title}</h3>
+        <p>{desc}</p>
+        <span className="quick-arrow" aria-hidden="true">→</span>
+      </div>
     </Link>
   );
 }

@@ -9,6 +9,7 @@ const CDN = "https://raw.githubusercontent.com/ByMykel/CSGO-API/main/public/imag
 // in client/public/media/. If a weapon isn't here, the CDN URL below is used.
 const WEAPON_LOCAL = {
   "AK-47":         "/media/ak47.png",
+  "M4A4":          "/media/m4a1.png",
   "M4A1-S":        "/media/m4a1_c.png",
   "AWP":           "/media/awp.png",
   "FAMAS":         "/media/famas.png",
@@ -17,6 +18,7 @@ const WEAPON_LOCAL = {
   "SSG 08":        "/media/ssg08.png",
   "Desert Eagle":  "/media/deagle.png",
   "USP-S":         "/media/usp.png",
+  "Glock-18":      "/media/glock18.png",
   "P250":          "/media/p250.png",
   "Tec-9":         "/media/tec9.png",
   "Five-SeveN":    "/media/fiveseven.png",
